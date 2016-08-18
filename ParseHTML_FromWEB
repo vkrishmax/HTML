@@ -1,0 +1,61 @@
+Parse HTML From Web With Jsoup
+
+jsoup is a Java library for working with real-world HTML. It provides a very convenient API for extracting and manipulating data, using the best of DOM, CSS, and jquery-like methods. This article explains how to parse html from web with Jsoup library. We obtain all links from the website "http://demo.mahara.org".  
+
+Step 1: create a maven based java project and add the following dependency in the pom.xml file . 
+
+<dependency>
+    <groupId>org.jsoup</groupId>
+    <artifactId>jsoup</artifactId>
+    <version>1.7.2</version>
+</dependency>
+Write the following code in the class "ParseHtmlFromUrl.java" file.
+
+package com.example.html;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+
+public class ParseHtmlFromUrl {
+
+    public static void main(String[] args) {
+        //Define a document
+        Document doc = null;
+        try {
+            //fetch and parse html from the web
+            doc = Jsoup.connect("http://demo.mahara.org").get();
+            //get the title of the website
+            String title = doc.title();
+            //print out title
+            System.out.println(title);
+            //get all links
+            Elements links=doc.getElementsByTag("a");
+            //print link text from each link
+            for(Element link: links)
+            {
+                System.out.println(link.text());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+Run the code above and see the result below. All links with the web page "http://demo.mahara.org" are displayed. 
+
+Skip to main content
+
+Mahara user manual
+
+Mahara user manual
+Mahara wiki
+Mahara homepage
+
+Terms and conditions
+Privacy statement
+About
+Contact us
